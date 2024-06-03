@@ -1,0 +1,8 @@
+resources:
+  - all.yaml
+  - internal-users.sealed.yaml
+  - roles-mapping.sealed.yaml
+  - config.sealed.yaml
+  - dex-ca.sealed.yaml
+generatorOptions:
+  disableNameSuffixHash: true
