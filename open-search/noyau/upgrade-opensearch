@@ -1,0 +1,13 @@
+#!/bin/bash
+
+openssl s_client -showcerts -connect k8s-master.acensi.local:32001 </dev/null | sed -n -e '/-.BEGIN/,/-.END/ p' > public.crt
+
+helm upgrade open-search -f values-opensearch.yaml opensearch/opensearch -n open-search --post-renderer ./kustomize.sh
+
+rm public.crt
+
+kubectl rollout restart -n open-search statefulset opensearch-cluster-master
+
+kubectl rollout status -n open-search statefulset opensearch-cluster-master
+
+kubectl exec -it -n open-search pods/opensearch-cluster-master-0 -- /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -rev  -cacert /usr/share/opensearch/config/root-ca.pem  -cert /usr/share/opensearch/config/kirk.pem -key /usr/share/opensearch/config/kirk-key.pem

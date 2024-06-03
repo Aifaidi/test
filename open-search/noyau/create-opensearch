@@ -1,0 +1,12 @@
+#!/bin/bash
+kubectl create namespace open-search
+
+helm repo add opensearch https://opensearch-project.github.io/helm-charts/
+
+openssl s_client -showcerts -connect k8s-master.acensi.local:32001 </dev/null | sed -n -e '/-.BEGIN/,/-.END/ p' > public.crt
+
+kubectl apply -f pv.yaml
+
+helm install open-search -f values-opensearch.yaml opensearch/opensearch -n open-search --post-renderer ./kustomize.sh
+
+rm public.crt
