@@ -1,6 +1,0 @@
-#!/bin/bash
-
-kubectl create secret generic dsb-tls -n open-search --from-file=tls.key=static/tls/key-opensearch.pem --from-file=tls.crt=static/tls/cert-opensearch.pem
-
-helm install open-search-dashboards -f values-dashboard.yaml opensearch/opensearch-dashboards -n open-search --post-renderer ./kustomize.sh
-
