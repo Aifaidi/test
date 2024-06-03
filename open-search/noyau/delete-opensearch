@@ -1,9 +1,0 @@
-#!/bin/bash
-
-helm delete open-search -n open-search
-
-kubectl delete pvc -n open-search opensearch-cluster-master-opensearch-cluster-master-0
-
-kubectl delete -f pv.yaml 
-
-#kubectl delete namespaces open-search
