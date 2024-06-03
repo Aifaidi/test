@@ -1,0 +1,8 @@
+apiVersion: v2
+name: opensearch-deployment
+version: 1.0.0
+appVersion: 2.20.0
+dependencies:
+  - name: opensearch
+    version: "~2.20.0"
+    repository: "https://opensearch-project.github.io/helm-charts/"
