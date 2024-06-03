@@ -1,4 +1,0 @@
-#!/bin/bash
-
-helm delete open-search-dashboards -n open-search
-
