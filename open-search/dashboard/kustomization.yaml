@@ -1,5 +1,0 @@
-resources:
-  - all.yaml
-  - opensearch-dashboard.sealed.yaml
-generatorOptions:
-  disableNameSuffixHash: true
